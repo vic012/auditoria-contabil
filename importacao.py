@@ -1,6 +1,7 @@
 import pandas as pd
 import xlrd
 import re
+import json
 
 class Importacao:
     def __init__(self):
@@ -44,7 +45,7 @@ class Importacao:
         df_historicos = pd.DataFrame(self.historico_separado)
         self.arquivo['historico sep'] = df_historicos
         #-------------------------------------------------------
-
+        print(type(self.fornecedor))
         compras = self.arquivo.loc[(self.arquivo['valcre'] != 0) & (self.arquivo['codic'] == int(self.fornecedor))]
         pagamentos = self.arquivo.loc[(self.arquivo['valdeb'] != 0) & (self.arquivo['codic'] == int(self.fornecedor))]
         saldo_anterior = self.arquivo.loc[(self.arquivo['valdeb'] == 0) & (self.arquivo['valcre'] == 0) & (self.arquivo['codic'] == int(self.fornecedor))]
@@ -52,7 +53,7 @@ class Importacao:
         #compras.to_excel('compras.xlsx') 
         #pagamentos.to_excel('Pagamentos.xlsx')
         #saldo_anterior.to_excel('Saldos.xlsx')
-        print(saldo_anterior.head(10))
+        
                 
 teste = Importacao()
 teste.arquivoDataFrame()
